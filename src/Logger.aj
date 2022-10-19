@@ -14,4 +14,8 @@ public aspect Logger {
     after() : success() {
     	System.out.println("**** User created ****:"+cal.getTime());
     }*/
+    pointcut retirarDinero() : call(* moneyWithdrawal());
+    after() : retirarDinero() {
+    	System.out.println("**** Dinero retirado ****"+cal.getTime());
+    }
 }
