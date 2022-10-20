@@ -10,21 +10,21 @@ public aspect Logger {
     
     pointcut success() : call(* create*(..) );
     after() : success() {
-    	System.out.println("**** User created ****");
+    	System.out.println("**** User created **** ");
     }
     
     pointcut realizarTransaccion(): call(* moneyMakeTransaction());
-    after():realizarTransaccion(){
+    after() : realizarTransaccion(){
     	try(PrintWriter pw=new PrintWriter(new FileOutputStream(file,true))){
-    		pw.println("Transaccion Realizad:"+cal.getTime());
-    		System.out.println("Transaccion Realizada!");
+    		pw.println("Transaccion Realizada: "+cal.getTime());
+    		System.out.println("****Transaccion Realizada**** "+cal.getTime());
     	}catch(FileNotFoundException e){System.out.println(e.getMessage());}    
     	}
     
     pointcut retirarDinero() : call(* moneyWithdrawal());
     after() : retirarDinero() {
     	try(PrintWriter pw=new PrintWriter(new FileOutputStream(file,true))){
-    		pw.println("Retiro Realizado"+cal.getTime());
+    		pw.println("Retiro Realizado: "+cal.getTime());
     		System.out.println("**** Dinero retirado **** "+cal.getTime());
     	}catch(FileNotFoundException e) {System.out.println(e.getMessage());}
     }
